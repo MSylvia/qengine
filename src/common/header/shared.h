@@ -53,6 +53,19 @@ typedef enum
 } qboolean;
 typedef unsigned char byte;
 
+/* BEGIN HACK FOR WINDOWS */
+#define __attribute__(x)
+
+#ifndef WINSHIT_INCLUDED
+#define WINSHIT_INCLUDED
+
+#if defined(WIN32) || defined(WIN64)
+#define strcasecmp _stricmp
+#endif /* Def WIN32 or Def WIN64 */
+#endif /* Ndef WINSHIT_INCLUDED */
+
+/* END HACK FOR WINDOWS */
+
 #ifndef NULL
 #define NULL ((void *) 0)
 #endif

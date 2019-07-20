@@ -6,7 +6,12 @@ option(BUILD_SDL "Build SDL platform" ON)
 option(BUILD_DOCS "Build documentation" ON)
 
 add_definitions(-DENGINE_VERSION="${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -Wall -Wextra -Wno-missing-field-initializers -Wno-unused-parameter -fno-strict-aliasing -fwrapv")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -fno-strict-aliasing -fwrapv")
+if (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /Wall")
+else ()
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-missing-field-initializers -Wno-unused-parameter")
+endif ()
 string(REPLACE "-O3"
                "-O2"
                CMAKE_C_FLAGS_RELEASE
